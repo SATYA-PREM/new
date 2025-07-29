@@ -727,7 +727,7 @@ svg {
   align-items: center;    /* center horizontally */
   justify-content: center;
   background-color: #f0eeee;
-  
+
   margin: 70px auto 3rem auto;
   padding-top: 50px;
   padding-bottom: 90px;
@@ -735,6 +735,20 @@ svg {
   color: #191937;
   text-align: center;     /* optional: center text */
 }
+
+/* ✅ Responsive behavior for mobile screens */
+@media (max-width: 768px) {
+  .deep-literature-section {
+    padding: 40px 16px 60px;   /* Reduce padding on smaller screens */
+    margin: 50px auto 2rem;
+  }
+
+  .deep-lit-features-grid {
+    grid-template-columns: 1fr !important;  /* Stack columns in mobile view */
+    gap: 1.5rem;
+  }
+}
+
 
 .deep-literature-section > h2 {
   font-size: 2.4rem;
