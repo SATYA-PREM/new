@@ -165,8 +165,10 @@ body {
 }
 
 .hero-buttons {
-  position: relative;
-  display:grid;
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-start;
+  flex-wrap: wrap;
 }
 
 .btn-hero {
@@ -653,7 +655,7 @@ gap: 2rem;
 }
 
 .feature-item:hover {
-  background: #eee7ff;
+  background: #edeff7;
 }
 
 .icon {
@@ -662,9 +664,12 @@ gap: 2rem;
 
 .feature-btns {
   display: flex;
-  gap: 1em;
-  margin-top: 12px;
+  gap: 1em;           /* space between buttons */
+  margin-top: 12px;   /* top margin */
+  justify-content: flex-start; /* align buttons to the left */
+  flex-wrap: wrap;    /* allow buttons to wrap on smaller screens */
 }
+
 
 .main-btn,
 .ghost-btn {
