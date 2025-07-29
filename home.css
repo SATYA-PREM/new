@@ -135,13 +135,7 @@ body {
 
 /* Hero Section */
 .hero {
-  background:
-    linear-gradient(
-      to bottom,
-      rgb(255, 255, 255) 60%,
-      rgb(225, 225, 254) 80%,
-      #ffffff 100%
-    );
+  
   padding: 1rem 0;
   text-align: left;
   border: none;
@@ -428,16 +422,27 @@ gap: 2rem;
     }
 
     .search-container {
-      display: flex;
-      align-items: center;
-      background: white;
-      border-radius: 9999px;
-      padding: 12px 20px;
-      width: 800px;
-      height: 50px;
-      max-width: 90%;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-    }
+  display: flex;
+  align-items: center;
+  background: white;
+  border-radius: 9999px;
+  padding: 12px 20px;
+  width: 800px;
+  height: 50px;
+  max-width: 90%;
+  position: relative;
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.1),    /* subtle drop shadow */
+    0 0 30px rgba(79, 70, 229, 0.5);   /* blue outer glow */
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.search-container:hover {
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.15),
+    0 0 40px rgba(79, 70, 229, 0.7);
+}
+
 
     .search-container input {
       border: none;
@@ -499,7 +504,7 @@ gap: 2rem;
   padding: 0rem;
   text-align: center;
    justify-content: center;
-  background:white;
+  background:#f9f9f9;
 }
 
 .trusted-title {
