@@ -723,8 +723,8 @@ svg {
 }
 .deep-literature-section {
   display: flex;
-  flex-direction: column; /* stack items vertically */
-  align-items: center;    /* center horizontally */
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
   background-color: #f0eeee;
 
@@ -733,19 +733,36 @@ svg {
   padding-bottom: 90px;
   font-family: 'Inter', sans-serif;
   color: #191937;
-  text-align: center;     /* optional: center text */
+  text-align: center;
 }
 
-/* ✅ Responsive behavior for mobile screens */
+/* Grid for inner content */
+.deep-lit-features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 2.2rem;
+  width: 100%;
+  max-width: 1100px;
+  justify-content: center; /* Ensures grid items are centered */
+}
+
+/* Responsive tweaks for mobile */
 @media (max-width: 768px) {
   .deep-literature-section {
-    padding: 40px 16px 60px;   /* Reduce padding on smaller screens */
+    padding: 40px 16px 60px;
     margin: 50px auto 2rem;
+    text-align: center;
   }
 
   .deep-lit-features-grid {
-    grid-template-columns: 1fr !important;  /* Stack columns in mobile view */
-    gap: 1.5rem;
+    grid-template-columns: 1fr;         /* Stack vertically */
+    justify-items: center;              /* Center each box horizontally */
+    padding: 0 1rem;                    /* Optional: Add horizontal padding */
+  }
+
+  .deep-box {
+    width: 100%;                        /* Full width for mobile */
+    max-width: 400px;                   /* Optional: limit max width */
   }
 }
 
