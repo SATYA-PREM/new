@@ -165,10 +165,8 @@ body {
 }
 
 .hero-buttons {
-  display: flex;
-  gap: 1rem;
-  justify-content: flex-start;
-  flex-wrap: wrap;
+  position: relative;
+  display:inline;
 }
 
 .btn-hero {
