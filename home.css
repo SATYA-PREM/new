@@ -664,12 +664,9 @@ gap: 2rem;
 
 .feature-btns {
   display: flex;
-  gap: 1em;           /* space between buttons */
-  margin-top: 12px;   /* top margin */
-  justify-content: flex-start; /* align buttons to the left */
-  flex-wrap: wrap;    /* allow buttons to wrap on smaller screens */
+  gap: 1em;
+  margin-top: 12px;
 }
-
 
 .main-btn,
 .ghost-btn {
