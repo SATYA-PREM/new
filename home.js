@@ -49,3 +49,33 @@ if (logo) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 }
+// Populate input when a tag is clicked
+    document.getElementById('tagList').addEventListener('click', (e) => {
+      if (e.target.classList.contains('tag')) {
+        document.getElementById('searchBox').value = e.target.textContent.trim();
+        document.getElementById('searchBox').focus();
+      }
+    });
+    const searchInput = document.getElementById('searchInput');
+const tags = document.querySelectorAll('.tag');
+
+tags.forEach(tag => {
+  tag.addEventListener('mouseover', () => {
+    searchInput.value = tag.textContent.trim();
+  });
+  tag.addEventListener('mouseout', () => {
+    searchInput.value = '';
+  });
+});
+// JavaScript
+const container = document.getElementById('logoContainer');
+const btnLeft = document.getElementById('scrollLeft');
+const btnRight = document.getElementById('scrollRight');
+
+btnLeft.addEventListener('click', () => {
+  container.scrollBy({ left: -150, behavior: 'smooth' });
+});
+
+btnRight.addEventListener('click', () => {
+  container.scrollBy({ left: 150, behavior: 'smooth' });
+});
