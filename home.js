@@ -1,113 +1,116 @@
-document.querySelector('.mobile-toggle').addEventListener('click', function() {
-            const navMenu = document.querySelector('.nav-menu');
-            navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
-        });
-
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Header scroll effect
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('.header');
-            if (window.scrollY > 100) {
-                header.style.background = 'rgba(255, 255, 255, 0.95)';
-                header.style.backdropFilter = 'blur(10px)';
-            } else {
-                header.style.background = 'var(--bg-white)';
-                header.style.backdropFilter = 'none';
-            }
-        });
-
-        // Button click handlers
-        document.querySelector('.btn-pricing').addEventListener('click', function() {
-            alert('Pricing page would be shown here');
-        });
-
-        // Add click handlers for other buttons
-        document.querySelectorAll('.btn').forEach(button => {
-            if (!button.classList.contains('btn-login') && !button.classList.contains('btn-pricing')) {
-                button.addEventListener('click', function() {
-                    console.log('Button clicked:', this.textContent);
-                });
-            }
-        });
-        const logo = document.querySelector('.logo');
-if (logo) {
-  logo.addEventListener('click', (e) => {
-    e.preventDefault();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-}
-// Populate input when a tag is clicked
-    document.getElementById('tagList').addEventListener('click', (e) => {
-      if (e.target.classList.contains('tag')) {
-        document.getElementById('searchBox').value = e.target.textContent.trim();
-        document.getElementById('searchBox').focus();
+document.addEventListener("DOMContentLoaded", function() {
+  // Mobile menu toggle
+  const mobileToggle = document.querySelector('.mobile-toggle');
+  if (mobileToggle) {
+    mobileToggle.addEventListener('click', function() {
+      const navMenu = document.querySelector('.nav-menu');
+      if (navMenu) {
+        navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
       }
     });
-    const searchInput = document.getElementById('searchInput');
-const tags = document.querySelectorAll('.tag');
+  }
 
-tags.forEach(tag => {
-  tag.addEventListener('mouseover', () => {
-    searchInput.value = tag.textContent.trim();
+  // Smooth scrolling for nav links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
   });
-  tag.addEventListener('mouseout', () => {
-    searchInput.value = '';
+
+  // Header scroll effect
+  window.addEventListener('scroll', function() {
+    const header = document.querySelector('.header');
+    if (header) {
+      if (window.scrollY > 100) {
+        header.style.background = 'rgba(255, 255, 255, 0.95)';
+        header.style.backdropFilter = 'blur(10px)';
+      } else {
+        header.style.background = 'var(--bg-white)';
+        header.style.backdropFilter = 'none';
+      }
+    }
   });
-});
-// JavaScript
-const container = document.getElementById('logoContainer');
-const btnLeft = document.getElementById('scrollLeft');
-const btnRight = document.getElementById('scrollRight');
 
-btnLeft.addEventListener('click', () => {
-  container.scrollBy({ left: -150, behavior: 'smooth' });
-});
+  // Pricing button click handler
+  document.querySelectorAll('.btn-pricing').forEach(btn => {
+    btn.addEventListener('click', function() {
+      alert('Pricing page would be shown here');
+    });
+  });
 
-btnRight.addEventListener('click', () => {
-  container.scrollBy({ left: 150, behavior: 'smooth' });
-});
-document.addEventListener("DOMContentLoaded", function() {
-  const items = document.querySelectorAll('.feature-item');
-  items.forEach((item, idx) => {
+  // Generic button logger
+  document.querySelectorAll('.btn:not(.btn-login):not(.btn-pricing)').forEach(btn => {
+    btn.addEventListener('click', function() {
+      console.log("Button clicked:", this.textContent);
+    });
+  });
+
+  // Logo click scroll-to-top
+  const logo = document.querySelector('.logo');
+  if (logo) {
+    logo.addEventListener('click', function(e) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  // Tag input population on click/hover
+  const searchInput = document.querySelector('.search-container input');
+  document.querySelectorAll('.tag').forEach(tag => {
+    tag.addEventListener('mouseover', () => {
+      if (searchInput) searchInput.value = tag.textContent.trim();
+    });
+    tag.addEventListener('mouseout', () => {
+      if (searchInput) searchInput.value = '';
+    });
+    tag.addEventListener('click', () => {
+      if (searchInput) {
+        searchInput.value = tag.textContent.trim();
+        searchInput.focus();
+      }
+    });
+  });
+  
+  // SVG feature-item enter animations
+  document.querySelectorAll('.feature-item').forEach((item, idx) => {
     item.style.opacity = 0;
     setTimeout(() => {
       item.style.transition = 'opacity 0.6s cubic-bezier(.51,.22,.09,1)';
       item.style.opacity = 1;
     }, 400 + idx * 120);
   });
-});
-// Animation for .draw paths and click to change active circles
-document.addEventListener('DOMContentLoaded', function () {
-  // Animate .draw paths on load
+
+  // scroll logo container only if buttons exist
+  const container = document.getElementById('logoContainer');
+  const btnLeft = document.getElementById('scrollLeft');
+  const btnRight = document.getElementById('scrollRight');
+  if (container && btnLeft && btnRight) {
+    btnLeft.addEventListener('click', () => {
+      container.scrollBy({ left: -150, behavior: 'smooth' });
+    });
+    btnRight.addEventListener('click', () => {
+      container.scrollBy({ left: 150, behavior: 'smooth' });
+    });
+  }
+
+  // Animate SVG paths with .draw
   document.querySelectorAll('path.draw').forEach(function(path) {
-    path.classList.add('draw'); // triggers the CSS animation above
+    path.classList.add('draw');
   });
 
-  // Optional: On click, activate circle and highlight paths it connects to
-  document.querySelectorAll('circle').forEach(function(circle) {
+  // SVG circles interaction
+  document.querySelectorAll('circle').forEach(circle => {
     circle.addEventListener('click', function () {
-      // Deactivate all circles
-      document.querySelectorAll('circle').forEach(function(c) {
+      document.querySelectorAll('circle').forEach(c => {
         c.classList.remove('active');
         c.classList.add('inactive');
       });
-      // Activate this one
       this.classList.remove('inactive');
       this.classList.add('active');
-      // Optionally: highlight associated paths by ID (custom logic)
       const circleId = this.id?.replace('c','');
       if (circleId) {
         document.querySelectorAll('path').forEach(function(path) {
@@ -120,8 +123,8 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   });
-});
-document.addEventListener("DOMContentLoaded", function() {
+
+  // Deep box fade-in animation
   document.querySelectorAll('.deep-box').forEach((box, i) => {
     box.style.opacity = 0;
     setTimeout(() => {
