@@ -167,7 +167,7 @@ body {
 .hero-buttons {
   display: flex;
   gap: 1rem;
-  justify-content: left;
+  justify-content: flex start;
   flex-wrap: wrap;
 }
 
@@ -179,6 +179,20 @@ body {
 .btn-primary {
   background: rgb(51, 71, 169);
   color: #ffffff;
+}
+@media (max-width: 768px) {
+  .nav-menu {
+    display: none; /* hide menu by default on mobile */
+    flex-direction: row; /* ensure horizontal layout */
+    flex-wrap: nowrap; /* no wrapping */
+    overflow-x: auto;  /* enable horizontal scroll if needed */
+    white-space: nowrap; /* keep items inline */
+    gap: 1rem; /* spacing between menu items */
+  }
+
+  .nav-menu.show {
+    display: flex !important; /* show menu when toggled */
+  }
 }
 
 .btn-primary:hover {

@@ -133,3 +133,9 @@ document.addEventListener("DOMContentLoaded", function() {
     }, 220 + i * 90);
   });
 });
+document.querySelector('.mobile-toggle').addEventListener('click', function() {
+  const navMenu = document.querySelector('.nav-menu');
+  if (navMenu) {
+    navMenu.classList.toggle('show');
+  }
+});
