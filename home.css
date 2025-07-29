@@ -166,7 +166,7 @@ body {
 
 .hero-buttons {
   position: relative;
-  display:inline;
+  display:grid;
 }
 
 .btn-hero {
