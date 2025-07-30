@@ -1,3 +1,42 @@
+
+window.modalManager.openModal('login'); // 👈 Auto-show modal on page load
+document.addEventListener('DOMContentLoaded', function() {
+    const howWorksBtn = document.getElementById('howThisWorksBtn');
+    if (howWorksBtn) {
+        howWorksBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const currentPage = window.location.pathname;
+            const isOnIndexPage = currentPage.includes('index.html') || currentPage === "/" || currentPage === "/index" || currentPage.endsWith("/index");
+
+            if (isOnIndexPage) {
+                // Already on index.html, so just scroll!
+                const target = document.querySelector('.features-container');
+                if (target) {
+                    const header = document.querySelector('.header');
+                    const headerHeight = header ? header.offsetHeight : 0;
+                    const targetPos = target.offsetTop - headerHeight;
+                    window.scrollTo({top: targetPos, behavior: 'smooth'});
+                }
+            } else {
+                // Not on index.html, go there with hash to scroll
+                window.location.href = 'index.html#features-container';
+            }
+        });
+    }
+
+    // --- hash based scroll fix ---
+    if (window.location.hash === '#features-container') {
+        setTimeout(function() {
+            const target = document.querySelector('.features-container');
+            if (target) {
+                const header = document.querySelector('.header');
+                const headerHeight = header ? header.offsetHeight : 0;
+                const targetPos = target.offsetTop - headerHeight;
+                window.scrollTo({ top: targetPos, behavior: 'smooth' });
+            }
+        }, 200);
+    }
+});
 // Theme Management
 class ThemeManager {
     constructor() {
@@ -614,3 +653,74 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 500);
     }
 });
+document.addEventListener('DOMContentLoaded', function() {
+    // Examples Modal Functionality
+    const exploreBtn = document.getElementById('exploreExamplesBtn');
+    const examplesModal = document.getElementById('examplesModal');
+    const examplesOverlay = document.getElementById('examplesOverlay');
+    const examplesClose = document.getElementById('examplesModalClose');
+    
+    // Open modal
+    function openExamplesModal() {
+        examplesModal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    }
+    
+    // Close modal
+    function closeExamplesModal() {
+        examplesModal.classList.add('hidden');
+        document.body.style.overflow = ''; // Restore scrolling
+    }
+    
+    // Event listeners
+    if (exploreBtn) {
+        exploreBtn.addEventListener('click', openExamplesModal);
+    }
+    
+    if (examplesClose) {
+        examplesClose.addEventListener('click', closeExamplesModal);
+    }
+    
+    if (examplesOverlay) {
+        examplesOverlay.addEventListener('click', closeExamplesModal);
+    }
+    
+    // Close on Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && !examplesModal.classList.contains('hidden')) {
+            closeExamplesModal();
+        }
+    });
+    
+    // Animate example items on scroll
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+    
+    // Observe example items when modal opens
+    function observeExampleItems() {
+        const exampleItems = document.querySelectorAll('.example-item');
+        exampleItems.forEach((item, index) => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(20px)';
+            item.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
+            observer.observe(item);
+        });
+    }
+    
+    // Initialize animations when modal opens
+    exploreBtn?.addEventListener('click', () => {
+        setTimeout(observeExampleItems, 300);
+    });
+});
+

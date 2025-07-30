@@ -1,3 +1,16 @@
+document.addEventListener('DOMContentLoaded', function() {
+    if (window.location.hash === '#features-container') {
+        setTimeout(function() {
+            const target = document.querySelector('.features-container');
+            if (target) {
+                const header = document.querySelector('.header');
+                const headerHeight = header ? header.offsetHeight : 0;
+                const targetPos = target.offsetTop - headerHeight;
+                window.scrollTo({ top: targetPos, behavior: 'smooth' });
+            }
+        }, 200); // slight delay to ensure all is rendered
+    }
+});
 
 // Updated generic button logger - exclude Learn More button
 document.querySelectorAll('.btn:not(.btn-login):not(.btn-pricing):not(.btn-secondary)').forEach(btn => {
