@@ -1,5 +1,5 @@
 
-window.modalManager.openModal('login'); // 👈 Auto-show modal on page load
+
 document.addEventListener('DOMContentLoaded', function() {
     const howWorksBtn = document.getElementById('howThisWorksBtn');
     if (howWorksBtn) {
