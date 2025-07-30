@@ -980,8 +980,13 @@ body {
   font-size: var(--font-size-base);
 }
 
+/* Add space between buttons in cta-section */
 .cta-section {
   margin-top: var(--space-24);
+  display: flex;
+  gap: var(--space-16); /* Adds space between buttons */
+  justify-content: center; /* Centers the buttons */
+  flex-wrap: wrap; /* Allows wrapping on smaller screens */
 }
 
 /* Examples Section */
@@ -1224,6 +1229,7 @@ body {
 }
 
 .link-btn {
+  
   background: none;
   border: none;
   color: var(--color-primary);
@@ -1360,36 +1366,52 @@ body {
   background: #5858f9;
   transform: translateY(-1px);
 }.all {
-  display: flex
-;
-    flex-direction: column;
-    align-items: center;
-    /* justify-content: center; */
-    gap: 1000px;
-    min-height: 100vh;
-    padding-top: 80px;
-   /* optional light background */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1000px;
+  min-height: 100vh;
+  padding-top: 80px;
 }
 
 .box {
-       width: 1200px;
-    height: 550px;
-    background-color: rgb(43, 43, 43);
-    border: 2px solid var(--color-background);
-    border-radius: 10px;
-    display: flex
-;
-    align-items: end;
-    justify-content: center;
-    padding-bottom: 20px;
+  width: 1200px;
+  height: 550px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 60px 80px 80px 80px; /* top, right, bottom, left */
+  box-sizing: border-box;
 }
 
-/* Optional: container full width centered */
+/* Text content styling */
+.box h1 {
+  text-align: left;
+  margin: 0;
+  font-size: 3.5rem;
+  line-height: 1.2;
+  font-weight: bold;
+}
+
+.box p {
+  text-align: left;
+  margin: 24px 0 0 0;
+  max-width: 650px;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+
+/* Search section positioning */
+.search-section {
+  align-self: center;
+  margin-top: auto;
+  margin-bottom: 20px; /* This pushes it up from the very bottom */
+}
+
+/* Container adjustments */
 .container {
   width: 100%;
   max-width: 1200px;
-  
 }
-
-/* Extend search bar */
-
