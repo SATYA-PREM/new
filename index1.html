@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Undermind - Radically better research, radically faster</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header__content">
+                <!-- Login/Register Section -->
+
+                <div class="header__logo">
+
+                    <h2>TechFlow</h2>
+                </div>
+                <nav class="header__nav">
+                    <div class="auth-section" id="log">
+                        <button class="auth-link" id="loginBtn">Login</button>
+                        <span class="auth-separator">|</span>
+                        <button class="auth-link" id="registerBtn">Register</button>
+                    </div>
+                    <a href="index.html" class="nav-link">home</a>
+
+                    <div class="header-buttons">
+                        <button class="btn btn-pricing">Pricing</button>
+                    </div>
+                    <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">
+                        <span class="theme-toggle__icon">☀️</span>
+                    </button>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <section class="all">
+        <div class="box">
+            <!-- Search Section -->
+        <section class="search-section">
+            <div class="container">
+                <div class="search-container">
+                    <button class="search-bar" id="searchBar">
+                        <span class="search-bar__icon">🔍</span>
+                        <span class="search-bar__text">Describe what you're looking for...</span>
+                    </button>
+                </div>
+                <div class="cta-section">
+                    <button class="btn btn--primary" id="exploreExamplesBtn">Explore Examples</button>
+                </div>
+            </div>
+        </section>
+    </section>
+        </div>
+
+
+
+
+
+        
+    </main>
+
+
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <p>&copy; 2025 Undermind. Revolutionizing research through AI.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login/Register Modal -->
+    <div class="modal hidden" id="authModal">
+        <div class="modal__overlay" id="modalOverlay"></div>
+        <div class="modal__content">
+            <div class="modal__header">
+                <h2 class="modal__title" id="modalTitle">Welcome Back</h2>
+                <button class="modal__close" id="modalClose" aria-label="Close modal">×</button>
+            </div>
+            <div class="modal__body">
+                <!-- Login Form -->
+                <form class="auth-form" id="loginForm">
+                    <div class="form-group">
+                        <label class="form-label" for="loginEmail">Email</label>
+                        <input type="email" id="loginEmail" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="loginPassword">Password</label>
+                        <input type="password" id="loginPassword" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="rememberMe">
+                            <span class="checkbox-text">Remember me</span>
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn--primary btn--full-width">Sign In</button>
+                    <div class="auth-links">
+                        <button type="button" class="link-btn" id="forgotPasswordBtn">Forgot password?</button>
+                    </div>
+                </form>
+
+                <!-- Register Form -->
+                <form class="auth-form hidden" id="registerForm">
+                    <div class="form-group">
+                        <label class="form-label" for="registerName">Full Name</label>
+                        <input type="text" id="registerName" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="registerEmail">Email</label>
+                        <input type="email" id="registerEmail" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="registerPassword">Password</label>
+                        <input type="password" id="registerPassword" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="confirmPassword">Confirm Password</label>
+                        <input type="password" id="confirmPassword" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn--primary btn--full-width">Create Account</button>
+                </form>
+
+                <!-- Forgot Password Form -->
+                <form class="auth-form hidden" id="forgotPasswordForm">
+                    <div class="form-group">
+                        <label class="form-label" for="forgotEmail">Email</label>
+                        <input type="email" id="forgotEmail" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn--primary btn--full-width">Reset Password</button>
+                </form>
+
+                <div class="auth-toggle">
+                    <button type="button" class="link-btn" id="authToggleBtn">
+                        Don't have an account? <span class="auth-toggle__text">Sign up</span>
+                    </button>
+                </div>
+
+                <div class="auth-back hidden" id="authBack">
+                    <button type="button" class="link-btn" id="backToAuthBtn">
+                        ← Back to sign in
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
