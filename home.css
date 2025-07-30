@@ -970,3 +970,448 @@ font-size: 16px;
     font-size: 1.5rem;
   }
 }
+/* Pricing Section */
+.pricing {
+  background: 
+  #eceffd;
+  padding: 4rem 1.5rem;
+}
+
+.pricing-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin: 0 auto 2rem auto;
+  max-width: 320px;
+  width: 100%;
+  font-weight: 600;
+  color: var(--text-dark);
+  user-select: none;
+}
+
+
+/* Toggle Switch */
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 54px;
+  height: 28px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+
+.slider {
+  position: absolute;
+  inset: 0;
+  background-color: #ccc;
+  border-radius: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.slider::before {
+  content: "";
+  position: absolute;
+  height: 22px;
+  width: 22px;
+  left: 3px;
+  bottom: 3px;
+  background-color: #fff;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+input:checked + .slider {
+  background-color: var(--primary-color);
+}
+
+input:checked + .slider::before {
+  transform: translateX(26px);
+}
+
+/* Savings badge next to Annual label */
+.savings {
+  background: var(--primary-color);
+  color: white;
+  padding: 0.2em 0.6em;
+  font-size: 0.75rem;
+  border-radius: 12px;
+  margin-left: 0.5rem;
+  font-weight: 600;
+}
+
+/* Grid layout for pricing cards - All 4 cards in horizontal row */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Always 4 equal columns */
+  gap: 1.5rem;
+  max-width: 1400px; /* Increased max-width to accommodate 4 cards */
+  margin: 0 auto;
+  padding: 0 1rem; /* Add padding for breathing room */
+}
+
+/* Individual pricing card */
+.pricing-card {
+  background: var(--bg-white);
+  border: 2px solid var(--border-color);
+  border-radius: 16px;
+  padding: 1.5rem 1.8rem; /* Slightly reduced padding for better fit */
+  text-align: center;
+  box-shadow: var(--shadow);
+  transition: box-shadow 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 420px;
+  position: relative; /* Needed for featured badge positioning */
+}
+
+.pricing-card:hover {
+  border-color: var(--primary-color);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-6px);
+}
+
+.pricing-card.featured {
+  border-color: var(--primary-color);
+  background: #f9faff;
+  transform: scale(1.02); /* Reduced scale to prevent overlap */
+  box-shadow: var(--shadow-lg);
+}
+
+/* "Most Popular" Badge */
+.featured-badge {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--primary-color);
+  color: white;
+  padding: 0.4rem 1.2rem;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  box-shadow: 0 4px 8px rgba(37, 99, 235, 0.3);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Pricing title */
+.pricing-card h3 {
+  font-size: 1.5rem; /* Slightly smaller for better fit */
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--text-dark);
+}
+
+/* Price display */
+.price {
+  font-size: 2.2rem; /* Adjusted for horizontal layout */
+  font-weight: 900;
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+  line-height: 1;
+  letter-spacing: -1px;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Show monthly price by default; hide annual */
+.monthly-price {
+  display: inline;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.annual-price {
+  display: none;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+/* Price description */
+.price-description {
+  color: var(--text-light);
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+  min-height: 48px;
+}
+
+/* Annual price display when toggled on */
+body.annual-pricing .monthly-price,
+body.annual-pricing .monthly-desc {
+  display: none;
+}
+
+body.annual-pricing .annual-price,
+body.annual-pricing .annual-desc {
+  display: inline;
+}
+
+/* Pricing feature list */
+.feature-list {
+  list-style: none;
+  margin-top: auto;
+  padding-left: 0;
+  text-align: left;
+  color: var(--text-light);
+  font-size: 0.85rem; /* Slightly smaller for better fit */
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.feature-list li {
+  margin-bottom: 0.6rem;
+  padding-left: 24px;
+  position: relative;
+}
+
+.feature-list li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  top: 2px;
+  font-weight: 900;
+  color: var(--primary-color);
+  font-size: 0.9rem;
+}
+
+/* Call to action buttons */
+.pricing-card button {
+  margin-top: 1.5rem;
+  width: 100%;
+  padding: 0.7rem 0.8rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  border-radius: 30px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  cursor: pointer;
+  border: none;
+  outline-offset: 4px;
+}
+
+/* Primary and outline button variants */
+.pricing-card.featured button,
+.pricing-card button.btn--primary {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.pricing-card button.btn--outline {
+  background: transparent;
+  color: var(--primary-color);
+  border: 2px solid var(--primary-color);
+}
+
+.pricing-card button:hover {
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1200px) {
+  .pricing-grid {
+    gap: 1rem;
+    max-width: 1200px;
+  }
+  
+  .pricing-card {
+    padding: 1.2rem 1.5rem;
+  }
+  
+  .price {
+    font-size: 2rem;
+  }
+  
+  .pricing-card h3 {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 950px) {
+  .pricing-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2x2 grid for tablets */
+    gap: 1.5rem;
+  }
+  
+  .pricing-card {
+    padding: 1.5rem 1.8rem;
+  }
+  
+  .price {
+    font-size: 2.2rem;
+  }
+  
+  .pricing-card h3 {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .pricing-grid {
+    grid-template-columns: 1fr; /* Single column for mobile */
+  }
+
+  .pricing-card {
+    min-height: auto;
+    padding: 2rem 2.5rem;
+  }
+  
+  .price {
+    font-size: 2.5rem;
+  }
+  
+  .pricing-card h3 {
+    font-size: 1.6rem;
+  }
+  
+  .feature-list {
+    font-size: 0.95rem;
+  }
+  
+  .pricing-toggle {
+    max-width: 100%;
+    padding: 0 1rem;
+    gap: 1rem;
+  }
+}
+
+/* For very large screens - prevent cards from becoming too wide */
+@media (min-width: 1400px) {
+  .pricing-grid {
+    max-width: 1400px;
+  }
+}
+
+/* Accessibility Focus States */
+.toggle-switch input:focus + .slider,
+.pricing-card button:focus {
+  outline: 3px solid var(--primary-hover);
+  outline-offset: 2px;
+  box-shadow: 0 0 8px var(--primary-hover);
+}
+/* ===== PRICING TOGGLE CSS ===== */
+
+/* Toggle switch styling */
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: var(--primary-color, #2563eb);
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+/* ===== PRICE DISPLAY RULES ===== */
+
+/* Default state - show monthly, hide annual */
+.monthly-price, .monthly-desc {
+    display: inline;
+}
+
+.annual-price, .annual-desc {
+    display: none;
+}
+
+/* When annual toggle is active */
+body.annual-pricing .monthly-price,
+body.annual-pricing .monthly-desc {
+    display: none !important;
+}
+
+body.annual-pricing .annual-price,
+body.annual-pricing .annual-desc {
+    display: inline !important;
+}
+
+/* Price styling */
+.price {
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: var(--primary-color, #2563eb);
+    margin-bottom: 0.5rem;
+    line-height: 1;
+    letter-spacing: -1px;
+    font-family: 'Inter', sans-serif;
+    transition: transform 0.2s ease;
+}
+
+.monthly-price, .annual-price {
+    font-weight: inherit;
+    color: inherit;
+}
+
+/* Savings badge */
+.savings {
+    background: var(--primary-color, #2563eb);
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    margin-left: 0.5rem;
+    font-weight: 600;
+}
+
+/* Toggle labels */
+.toggle-label {
+    font-weight: 600;
+    color: var(--text-dark, #000);
+    user-select: none;
+}
+
+/* Pricing toggle container */
+.pricing-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    margin: 0 auto 2rem auto;
+    max-width: 320px;
+    width: 100%;
+    font-weight: 600;
+    color: var(--text-dark, #000);
+    user-select: none;
+}

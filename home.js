@@ -1,3 +1,30 @@
+// Debug function - add this temporarily to test
+function debugPricingToggle() {
+    const toggle = document.getElementById('annual-toggle');
+    const body = document.body;
+    
+    console.log('=== PRICING TOGGLE DEBUG ===');
+    console.log('Toggle element found:', !!toggle);
+    console.log('Toggle checked:', toggle ? toggle.checked : 'N/A');
+    console.log('Body has annual-pricing class:', body.classList.contains('annual-pricing'));
+    console.log('Monthly prices found:', document.querySelectorAll('.monthly-price').length);
+    console.log('Annual prices found:', document.querySelectorAll('.annual-price').length);
+    console.log('Monthly descriptions found:', document.querySelectorAll('.monthly-desc').length);
+    console.log('Annual descriptions found:', document.querySelectorAll('.annual-desc').length);
+    
+    // Test the toggle
+    if (toggle) {
+        console.log('Testing toggle...');
+        toggle.click();
+        setTimeout(() => {
+            console.log('After toggle - Body has annual-pricing:', body.classList.contains('annual-pricing'));
+        }, 100);
+    }
+}
+
+// Run debug after page loads
+setTimeout(debugPricingToggle, 1000);
+
 /* ===== Search-Bar Logic for
    <div class="search-container"> … </div>
    — drop in after the HTML — */
