@@ -1,20 +1,75 @@
 
+// Updated generic button logger - exclude Learn More button
+document.querySelectorAll('.btn:not(.btn-login):not(.btn-pricing):not(.btn-secondary)').forEach(btn => {
+    btn.addEventListener('click', function () {
+        console.log("Button clicked:", this.textContent);
+    });
+});
+document.addEventListener('DOMContentLoaded', function() {
+    // Handle "Learn More" button scroll to features container
+    const learnMoreBtn = document.querySelector('.btn-secondary.btn-hero');
+    const featuresContainer = document.querySelector('.features-container');
+    
+    if (learnMoreBtn && featuresContainer) {
+        learnMoreBtn.addEventListener('click', function(e) {
+            e.preventDefault(); // Prevent default button behavior
+            
+            // Smooth scroll to features container
+            featuresContainer.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        });
+    }
+});
 
 
 document.addEventListener('DOMContentLoaded', () => {
-   const toggle = document.getElementById('annual-toggle');
-    
-    if (toggle) {
-        toggle.addEventListener('change', function() {
-            const pricingGrid = document.querySelector('.pricing-grid');
-            
-            if (this.checked) {
-                pricingGrid.classList.add('annual-mode');
-            } else {
-                pricingGrid.classList.remove('annual-mode');
-            }
-        });
+  const searchInput = document.getElementById('searchInput');
+
+  if (searchInput) {
+    // Redirect functionality
+    searchInput.addEventListener('click', function () {
+      window.location.href = 'index1.html';
+    });
+
+    // Optional: Keep placeholder animation (remove if not needed)
+    const phrases = [
+      "Describe what you're looking for…",
+      "What is the latest on quantum computing?",
+      "Find papers about ML in healthcare"
+    ];
+
+    let phraseIdx = 0, charIdx = 0, deleting = false;
+
+    function typeLoop() {
+      const text = phrases[phraseIdx];
+      searchInput.placeholder = text.substring(0, charIdx);
+
+      if (!deleting) {
+        charIdx++;
+        if (charIdx === text.length + 1) {
+          deleting = true;
+          setTimeout(typeLoop, 800);
+          return;
+        }
+      } else {
+        charIdx--;
+        if (charIdx === 0) {
+          deleting = false;
+          phraseIdx = (phraseIdx + 1) % phrases.length;
+          setTimeout(typeLoop, 400);
+          return;
+        }
+      }
+
+      setTimeout(typeLoop, deleting ? 40 : 80);
     }
+
+    setTimeout(typeLoop, 500);
+  }
+
+  // Res
   // Select both buttons that should scroll to pricing
   const pricingButtons = document.querySelectorAll('.btn-pricing');
   const pricingSection = document.getElementById('pricing');
@@ -48,9 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const searchContainer = document.querySelector('.search-container');
   if (!searchContainer) return;
 
-  /* DOM references */
-  const searchInput = searchContainer.querySelector('input');
-  const searchBtn = searchContainer.querySelector('button');
+  
 
   /* -------------------------------------------------
      1.  Animated placeholder typing & erasing
@@ -231,24 +284,47 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   const toggle = document.getElementById('annual-toggle');
-    const body = document.body;
-    
-    if (toggle) {
-        toggle.addEventListener('change', function() {
-            if (this.checked) {
-                body.classList.add('annual-pricing');
-            } else {
-                body.classList.remove('annual-pricing');
-            }
-        });
-    }
+  const body = document.body;
+
+  if (toggle) {
+    toggle.addEventListener('change', function () {
+      if (this.checked) {
+        body.classList.add('annual-pricing');
+      } else {
+        body.classList.remove('annual-pricing');
+      }
+    });
+  }
 
   // Generic button logger
-  document.querySelectorAll('.btn:not(.btn-login):not(.btn-pricing)').forEach(btn => {
-    btn.addEventListener('click', function () {
-      console.log("Button clicked:", this.textContent);
-    });
-  });
+  document.addEventListener('DOMContentLoaded', function() {
+    // Handle "Learn More" button scroll to features container
+    const learnMoreBtn = document.querySelector('.btn-secondary.btn-hero');
+    const featuresContainer = document.querySelector('.features-container');
+    
+    if (learnMoreBtn && featuresContainer) {
+        learnMoreBtn.addEventListener('click', function(e) {
+            e.preventDefault(); // Prevent default button behavior
+            e.stopPropagation(); // Stop event bubbling
+            
+            console.log('Learn More clicked - scrolling to features'); // Debug log
+            
+            // Smooth scroll to features container with offset
+            const headerHeight = document.querySelector('.header')?.offsetHeight || 80;
+            const targetPosition = featuresContainer.offsetTop - headerHeight;
+            
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+            });
+        });
+    } else {
+        console.log('Learn More button or features container not found');
+        console.log('Button found:', !!learnMoreBtn);
+        console.log('Container found:', !!featuresContainer);
+    }
+});
+
 
   // Logo click scroll-to-top
   const logo = document.querySelector('.logo');
@@ -402,6 +478,102 @@ function initTestimonialCarousel() {
   // Initialize first slide
   showSlide(0);
 }// JavaScript for smooth scrolling to pricing section
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', () => {
+  // SEARCH BAR REDIRECT FUNCTIONALITY
+  const searchInput = document.getElementById('searchInput');
   
+  if (searchInput) {
+    // Primary redirect functionality
+    searchInput.addEventListener('click', function () {
+      window.location.href = 'index1.html';
+    });
+    
+    // Also redirect on focus for better UX
+    searchInput.addEventListener('focus', function () {
+      window.location.href = 'index1.html';
+    });
+    
+    // Optional: Keep only the placeholder animation (simplified)
+    const phrases = [
+      "Describe what you're looking for…",
+      "What is the latest on quantum computing?",
+      "Find papers about ML in healthcare"
+    ];
+    
+    let phraseIdx = 0, charIdx = 0, deleting = false;
+    
+    function typeLoop() {
+      const text = phrases[phraseIdx];
+      searchInput.placeholder = text.substring(0, charIdx);
+      
+      if (!deleting) {
+        charIdx++;
+        if (charIdx === text.length + 1) {
+          deleting = true;
+          setTimeout(typeLoop, 800);
+          return;
+        }
+      } else {
+        charIdx--;
+        if (charIdx === 0) {
+          deleting = false;
+          phraseIdx = (phraseIdx + 1) % phrases.length;
+          setTimeout(typeLoop, 400);
+          return;
+        }
+      }
+      
+      setTimeout(typeLoop, deleting ? 40 : 80);
+    }
+    
+    setTimeout(typeLoop, 500);
+  }
+
+  // PRICING BUTTONS SCROLL FUNCTIONALITY
+  const pricingButtons = document.querySelectorAll('.btn-pricing');
+  const pricingSection = document.getElementById('pricing');
+
+  pricingButtons.forEach(button => {
+    button.addEventListener('click', function (e) {
+      e.preventDefault();
+      pricingSection.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    });
+  });
+
+  // Initialize testimonial carousel
+  initTestimonialCarousel();
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Handle hash-based scrolling when page loads
+    function scrollToPricingIfNeeded() {
+        const hash = window.location.hash;
+        
+        if (hash === '#pricing') {
+            setTimeout(() => {
+                const pricingSection = document.getElementById('pricing');
+                if (pricingSection) {
+                    const headerHeight = document.querySelector('.header')?.offsetHeight || 80;
+                    const targetPosition = pricingSection.offsetTop - headerHeight;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            }, 100); // Small delay to ensure page is fully loaded
+        }
+    }
+    
+    // Scroll on page load
+    scrollToPricingIfNeeded();
+    
+    // Also handle if hash changes
+    window.addEventListener('hashchange', scrollToPricingIfNeeded);
+});
+document.querySelector('.ghost-btn').addEventListener('click', function() {
+    window.location.href = 'index1.html?source=index-example';
 });

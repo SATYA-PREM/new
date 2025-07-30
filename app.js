@@ -574,4 +574,43 @@ document.addEventListener('DOMContentLoaded', function () {
     } catch (error) {
         console.error('Error initializing application:', error);
     }
+});document.addEventListener('DOMContentLoaded', function() {
+    // Pricing button click handler for different file
+    const pricingButtons = document.querySelectorAll('.btn-pricing');
+    
+    pricingButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Check if we're already on index.html
+            const currentPage = window.location.pathname;
+            const isOnIndexPage = currentPage.includes('index.html') || currentPage === '/';
+            
+            if (isOnIndexPage) {
+                // We're already on index.html, just scroll to pricing
+                const pricingSection = document.getElementById('pricing');
+                if (pricingSection) {
+                    pricingSection.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            } else {
+                // Navigate to index.html with hash for pricing section
+                window.location.href = 'index.html#pricing';
+            }
+        });
+    });
+});
+document.addEventListener('DOMContentLoaded', function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const source = urlParams.get('source');
+    const popup = urlParams.get('popup');
+    
+    // Only show popup if NOT coming from index.html example
+    if (popup === 'login' && source !== 'index-example') {
+        setTimeout(() => {
+            document.getElementById('loginBtn').click();
+        }, 500);
+    }
 });
