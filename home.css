@@ -296,14 +296,14 @@ gap: 2rem;
 
 /* CTA Section */
 .cta {
-  background: var(--bg-light);
+  background: #f3f3f3;
   padding: 4rem 0;
   text-align: center;
 }
 
 .cta-container {
   max-width: 800px;
-  margin: 0 auto;
+  margin: 10px auto;
   padding: 0 2rem;
 }
 
@@ -1356,16 +1356,17 @@ input:checked + .slider:before {
     display: none;
 }
 
-/* When annual toggle is active */
-body.annual-pricing .monthly-price,
-body.annual-pricing .monthly-desc {
+/* Alternative approach - add to your existing CSS */
+.pricing-grid.annual-mode .monthly-price,
+.pricing-grid.annual-mode .monthly-desc {
     display: none !important;
 }
 
-body.annual-pricing .annual-price,
-body.annual-pricing .annual-desc {
+.pricing-grid.annual-mode .annual-price,
+.pricing-grid.annual-mode .annual-desc {
     display: inline !important;
 }
+
 
 /* Price styling */
 .price {
@@ -1414,4 +1415,146 @@ body.annual-pricing .annual-desc {
     font-weight: 600;
     color: var(--text-dark, #000);
     user-select: none;
+}
+/* Testimonials Section */
+.testimonials {
+  
+  padding: 4rem 0;
+  background: #f3f3f3;
+}
+
+.testimonials-slider {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.testimonial-track {
+  position: relative;
+  overflow: hidden;
+}
+
+.testimonial-slide {
+  display: none;
+  text-align: center;
+  padding: var(--space-32);
+  
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    
+    color: var(--text-dark);
+
+    font-weight: bold;         /* 👈 Makes all text bold */
+    font-size: 30px;           /* 👈 Increases base font size */
+
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  opacity: 0;
+  transform: translateX(100px);
+  transition: all 0.5s ease;
+}
+
+.testimonial-slide.active {
+  display: block;
+  opacity: 1;
+  transform: translateX(0);
+  font-weight: bold;         /* 👈 Makes all text bold */
+    font-size: 18px;           /* 👈 Increases base font size */
+
+}
+
+.testimonial-slide blockquote {
+  font-size: var(--font-size-lg);
+  line-height: 1.6;
+  color: var(--color-text);
+  margin-bottom: var(--space-24);
+  font-style: italic;
+}
+
+.testimonial-author strong {
+  display: block;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+  margin-bottom: var(--space-4);
+}
+
+.testimonial-author span {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.testimonial-nav {
+    display: flex
+;
+    justify-content: center;
+    gap: 600px;
+    margin-top: var(--space-24);
+}
+
+.testimonial-prev,
+.testimonial-next {
+  width: 40px;
+  height: 40px;
+  border: 2px solid var(--primary-blue);
+  background: white;
+  color: var(--primary-blue);
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: var(--font-size-xl);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-smooth);
+}
+
+.testimonial-prev:hover,
+.testimonial-next:hover {
+  background: var(--primary-blue);
+  color: white;
+}
+
+.testimonial-dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: var(--space-16);
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: none;
+  background: rgb(0, 0, 0);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.dot.active {
+  background: var(--primary-blue);
+}
+/* CSS for smooth scrolling behavior */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Ensure pricing section has proper spacing for scroll target */
+#pricing {
+    scroll-margin-top: 80px; /* Adjust this value based on your header height */
+}
+
+/* Optional: Add hover effects to pricing buttons */
+.btn-pricing {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.btn-pricing:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Ensure buttons are clickable */
+.btn-pricing {
+    pointer-events: auto;
 }

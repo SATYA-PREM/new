@@ -1,41 +1,56 @@
-// Debug function - add this temporarily to test
-function debugPricingToggle() {
-    const toggle = document.getElementById('annual-toggle');
-    const body = document.body;
-    
-    console.log('=== PRICING TOGGLE DEBUG ===');
-    console.log('Toggle element found:', !!toggle);
-    console.log('Toggle checked:', toggle ? toggle.checked : 'N/A');
-    console.log('Body has annual-pricing class:', body.classList.contains('annual-pricing'));
-    console.log('Monthly prices found:', document.querySelectorAll('.monthly-price').length);
-    console.log('Annual prices found:', document.querySelectorAll('.annual-price').length);
-    console.log('Monthly descriptions found:', document.querySelectorAll('.monthly-desc').length);
-    console.log('Annual descriptions found:', document.querySelectorAll('.annual-desc').length);
-    
-    // Test the toggle
-    if (toggle) {
-        console.log('Testing toggle...');
-        toggle.click();
-        setTimeout(() => {
-            console.log('After toggle - Body has annual-pricing:', body.classList.contains('annual-pricing'));
-        }, 100);
-    }
-}
 
-// Run debug after page loads
-setTimeout(debugPricingToggle, 1000);
 
-/* ===== Search-Bar Logic for
-   <div class="search-container"> … </div>
-   — drop in after the HTML — */
 
 document.addEventListener('DOMContentLoaded', () => {
+   const toggle = document.getElementById('annual-toggle');
+    
+    if (toggle) {
+        toggle.addEventListener('change', function() {
+            const pricingGrid = document.querySelector('.pricing-grid');
+            
+            if (this.checked) {
+                pricingGrid.classList.add('annual-mode');
+            } else {
+                pricingGrid.classList.remove('annual-mode');
+            }
+        });
+    }
+  // Select both buttons that should scroll to pricing
+  const pricingButtons = document.querySelectorAll('.btn-pricing');
+  const pricingSection = document.getElementById('pricing');
+
+  // Add click event listeners to all pricing buttons
+  pricingButtons.forEach(button => {
+    button.addEventListener('click', function (e) {
+      e.preventDefault(); // Prevent default button behavior
+
+      // Smooth scroll to pricing section
+      pricingSection.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    });
+  });
+
+  // Alternative method using offset for more control
+  function scrollToPricing() {
+    const headerHeight = document.querySelector('.header').offsetHeight || 80;
+    const targetPosition = pricingSection.offsetTop - headerHeight;
+
+    window.scrollTo({
+      top: targetPosition,
+      behavior: 'smooth'
+    });
+  }
+
+  // You can also use this alternative function if you need more control over the scroll position
+  // Just replace scrollIntoView with scrollToPricing() in the event listener above
   const searchContainer = document.querySelector('.search-container');
   if (!searchContainer) return;
 
   /* DOM references */
   const searchInput = searchContainer.querySelector('input');
-  const searchBtn   = searchContainer.querySelector('button');
+  const searchBtn = searchContainer.querySelector('button');
 
   /* -------------------------------------------------
      1.  Animated placeholder typing & erasing
@@ -48,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
     "Research climate-change mitigation"
   ];
   let phraseIdx = 0, charIdx = 0,
-      deleting  = false, waiting = false;
+    deleting = false, waiting = false;
 
   function typeLoop() {
     if (waiting) return;
@@ -61,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
       charIdx++;
       if (charIdx === text.length + 1) {
         deleting = true;
-        waiting  = true;
+        waiting = true;
         setTimeout(() => { waiting = false; }, 800);  // shorter pause before erasing
       }
     } else {
@@ -78,19 +93,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const speed = deleting ? 40 : 80;
     setTimeout(typeLoop, speed);
   }
+  // Testimonial Carousel
+  initTestimonialCarousel();
 
   setTimeout(typeLoop, 500);  // start sooner
 
   /* pause typing while user is focused */
-  searchInput.addEventListener('focus',  () => waiting = true);
-  searchInput.addEventListener('blur',   () => waiting = false);
+  searchInput.addEventListener('focus', () => waiting = true);
+  searchInput.addEventListener('blur', () => waiting = false);
 
   /* -------------------------------------------------
      2.  Focus / blur elevation effect
   ---------------------------------------------------*/
   searchInput.addEventListener('focus', () => {
-    searchContainer.style.transform  = 'translateY(-2px)';
-    searchContainer.style.boxShadow  = '0 10px 25px rgba(30,64,175,.2)';
+    searchContainer.style.transform = 'translateY(-2px)';
+    searchContainer.style.boxShadow = '0 10px 25px rgba(30,64,175,.2)';
   });
   searchInput.addEventListener('blur', () => {
     if (!searchInput.value.trim()) {
@@ -213,12 +230,18 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // Pricing button click handler
-  document.querySelectorAll('.btn-pricing').forEach(btn => {
-    btn.addEventListener('click', function () {
-      alert('Pricing page would be shown here');
-    });
-  });
+  const toggle = document.getElementById('annual-toggle');
+    const body = document.body;
+    
+    if (toggle) {
+        toggle.addEventListener('change', function() {
+            if (this.checked) {
+                body.classList.add('annual-pricing');
+            } else {
+                body.classList.remove('annual-pricing');
+            }
+        });
+    }
 
   // Generic button logger
   document.querySelectorAll('.btn:not(.btn-login):not(.btn-pricing)').forEach(btn => {
@@ -316,4 +339,69 @@ document.querySelector('.mobile-toggle').addEventListener('click', function () {
   if (navMenu) {
     navMenu.classList.toggle('show');
   }
+});
+// Testimonial Carousel
+initTestimonialCarousel();// Testimonial Carousel
+function initTestimonialCarousel() {
+  const slides = document.querySelectorAll('.testimonial-slide');
+  const prevBtn = document.querySelector('.testimonial-prev');
+  const nextBtn = document.querySelector('.testimonial-next');
+  const dots = document.querySelectorAll('.dot');
+
+  let currentSlide = 0;
+  const totalSlides = slides.length;
+
+  function showSlide(index) {
+    // Hide all slides
+    slides.forEach((slide, i) => {
+      slide.classList.remove('active');
+      if (dots[i]) {
+        dots[i].classList.remove('active');
+      }
+    });
+
+    // Show current slide
+    if (slides[index]) {
+      slides[index].classList.add('active');
+      if (dots[index]) {
+        dots[index].classList.add('active');
+      }
+    }
+  }
+
+  function nextSlide() {
+    currentSlide = (currentSlide + 1) % totalSlides;
+    showSlide(currentSlide);
+  }
+
+  function prevSlide() {
+    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+    showSlide(currentSlide);
+  }
+
+  // Event listeners
+  if (nextBtn) {
+    nextBtn.addEventListener('click', nextSlide);
+  }
+
+  if (prevBtn) {
+    prevBtn.addEventListener('click', prevSlide);
+  }
+
+  // Dot navigation
+  dots.forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+      currentSlide = index;
+      showSlide(currentSlide);
+    });
+  });
+
+  // Auto-advance slides
+  setInterval(nextSlide, 5000);
+
+  // Initialize first slide
+  showSlide(0);
+}// JavaScript for smooth scrolling to pricing section
+document.addEventListener('DOMContentLoaded', function () {
+  
 });
