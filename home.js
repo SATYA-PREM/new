@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const searchBtn   = searchContainer.querySelector('button');
 
   /* -------------------------------------------------
-     1.  Animated placeholder typing
+     1.  Animated placeholder typing & erasing
   ---------------------------------------------------*/
   const phrases = [
     "Describe what you're looking for…",
@@ -30,13 +30,12 @@ document.addEventListener('DOMContentLoaded', () => {
     /* update placeholder */
     searchInput.placeholder = text.substring(0, charIdx);
 
-    /* typing / deleting */
     if (!deleting) {
       charIdx++;
       if (charIdx === text.length + 1) {
         deleting = true;
         waiting  = true;
-        setTimeout(() => (waiting = false), 2000);   // pause at end
+        setTimeout(() => { waiting = false; }, 800);  // shorter pause before erasing
       }
     } else {
       charIdx--;
@@ -44,14 +43,16 @@ document.addEventListener('DOMContentLoaded', () => {
         deleting = false;
         phraseIdx = (phraseIdx + 1) % phrases.length;
         waiting = true;
-        setTimeout(() => (waiting = false), 400);    // pause before next
+        setTimeout(() => { waiting = false; }, 400);
       }
     }
-    /* speed */
-    const speed = deleting ? 60 : 120;
+
+    /* faster speeds */
+    const speed = deleting ? 40 : 80;
     setTimeout(typeLoop, speed);
   }
-  setTimeout(typeLoop, 800);                        // start after short delay
+
+  setTimeout(typeLoop, 500);  // start sooner
 
   /* pause typing while user is focused */
   searchInput.addEventListener('focus',  () => waiting = true);
@@ -146,46 +147,6 @@ document.addEventListener('DOMContentLoaded', () => {
       (e.key === 'Escape') && close(), { once: true });
   }
 });
-
-/* ========= Inject minimal CSS (optional) ========== */
-const css = `
-.search-container{display:flex;gap:.5rem;align-items:center;
-  background:#fff;padding:.5rem .75rem;border-radius:9999px;
-  box-shadow:0 4px 6px rgba(0,0,0,.08);transition:.25s}
-.search-container input{border:none;outline:none;width:220px;font:16px/1.4 Inter,Arial,sans-serif}
-.search-container button{background:#1e40af;color:#fff;border:none;
-  display:flex;align-items:center;justify-content:center;
-  padding:.55rem .8rem;border-radius:9999px;cursor:pointer;
-  transition:transform .15s}
-.search-container button svg{width:18px;height:18px}
-.spinner{display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,.3);
-  border-top-color:#fff;border-radius:50%;animation:spin 1s linear infinite;margin-right:6px}
-@keyframes spin{to{transform:rotate(360deg)}}
-@keyframes shake{10%,90%{transform:translateX(-1px)}
-  20%,80%{transform:translateX(2px)}30%,50%,70%{transform:translateX(-4px)}
-  40%,60%{transform:translateX(4px)}}
-.search-modal{position:fixed;inset:0;background:rgba(0,0,0,.5);
-  display:flex;align-items:center;justify-content:center;opacity:0;transition:.25s}
-.search-modal.open{opacity:1}
-.search-modal .modal-content{background:#fff;width:90%;max-width:600px;
-  max-height:80vh;overflow-y:auto;border-radius:12px;transform:translateY(20px);
-  transition:.25s;padding:1.5rem;box-shadow:0 20px 40px rgba(0,0,0,.2)}
-.search-modal.open .modal-content{transform:translateY(0)}
-.search-modal header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
-.search-modal header h3{font:600 18px/1.3 Inter,Arial,sans-serif;margin:0}
-.search-modal header button{font-size:26px;border:none;background:none;cursor:pointer;color:#6b7280}
-.search-modal .body article{padding:1rem 0;border-bottom:1px solid #f3f4f6}
-.search-modal .body article:last-child{border-bottom:none}
-.search-modal .body h4{margin:0 0 .25rem;font:600 16px/1.3 Inter,Arial,sans-serif;color:#1e40af}
-.search-modal .body p{margin:0 0 .25rem;color:#4b5563;font-size:14px}
-.search-modal .body span{font-size:12px;color:#9ca3af}
-.search-modal footer{text-align:center;margin-top:1.25rem}
-.btn-primary{background:#1e40af;color:#fff;border:none;padding:.55rem 1.2rem;
-  border-radius:8px;cursor:pointer;font:600 14px Inter,Arial,sans-serif}
-`;
-const style = document.createElement('style');
-style.textContent = css;
-document.head.appendChild(style);
 document.addEventListener("DOMContentLoaded", function () {
   // Mobile menu toggle
   const mobileToggle = document.querySelector('.mobile-toggle');
