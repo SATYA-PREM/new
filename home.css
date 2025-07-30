@@ -179,8 +179,9 @@ body {
 
 .btn-hero {
   padding: 0.5rem 1rem;
+  position: relative;
   font-size: 1rem;
-  width:250px;
+  width:auto;
 }
 
 .btn-primary {
