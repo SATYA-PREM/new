@@ -20,6 +20,13 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     });
   });
+<button class="btn btn-login" onclick="goToLogin()">Login</button>
+
+<script>
+  function goToLogin() {
+    window.location.href = 'https://htmlpreview.github.io/?https://github.com/SATYA-PREM/new/blob/main/login.html';
+  }
+</script>
 
   // Header scroll effect
   window.addEventListener('scroll', function() {
